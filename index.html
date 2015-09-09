@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Общественный транспорт
+		</title>
+			<link rel="stylesheet" href="/css/style.css" />
+			<link rel="stylesheet" href="/css/leaflet.css" />
+			<link rel="stylesheet" href="/css/font-awesome.min.css" />
+	</head>
+	<body>
+		<div id="block">
+			<div class="menu">
+				<ul class="horizontal_menu">
+					<li class="menu_item_left"><a href="/"><i class="fa fa-globe"></i>&nbsp;Карта</a></li>
+					<li class="menu_item_right"><a href="/routes.html"><i class="fa fa-bus"></i>&nbsp;Маршруты</a></li>
+				</ul>
+			</div>
+			<div class="body">
+				<link rel='stylesheet' href='/css/map.css' />
+				<link rel='stylesheet' href='/css/leaflet.label.css' />
+				<link rel='stylesheet' href='/css/Control.FullScreen.css' />
+				<link rel='stylesheet' href='/css/L.Control.Locate.min.css' />
+				<!--[if lt IE 9]>
+					<link rel='stylesheet' href='/css/L.Control.Locate.ie.min.css'/>
+				<![endif]-->
+
+				<script src='/js/jquery-2.1.4.min.js'></script>
+				<script src='/js/underscore-min.js'></script>
+				<script src='/js/backbone-min.js'></script>
+				<script src='/js/leaflet.js'></script>
+				<script src='/js/leaflet.label.js'></script>
+				<script src='/js/TileLayer.GeoJSON.js'></script>
+				<script src='/js/Control.FullScreen.js'></script>
+				<script src='/js/L.Control.Locate.min.js' ></script>
+				<script src='/js/leaflet.polylineoffset.js' ></script>
+				<script src='/js/randomColor.js' ></script>
+
+				<script src='/js/MapData.js'></script>
+				<script src='/js/MapView.js'></script>
+				<script src='/js/RouteView.js'></script>
+				<script src='/js/PlaceView.js'></script>
+				<script src='/js/RefView.js'></script>
+
+				<script type='text/javascript'>
+					function left_panel_toggle() {
+						$('#left_panel_content').toggle();
+						if ($('#left_panel_content').css('display') == 'none') {
+							$('#left_panel_control').css('left', '0px');
+						} else {
+							$('#left_panel_control').css('left', '286px');
+						}
+						map.invalidateSize();
+					}
+				</script>
+
+				<div id='left_panel'>
+					<div id='left_panel_content'></div>
+					<div id='left_panel_control' class='leaflet-control' onclick='left_panel_toggle()'>
+						<span>⇤<br>⇥</span>
+					</div>
+				</div>
+				<div id='map' class='map'></div>
+
+				<script type="text/html" id="route_info_template">
+					<div id="content_header">
+						<div align="center"><a href="#place/<%= place_id %>" id="close_route">Закрыть маршрут</a><hr></div>
+						<a href="#ref/<%=ref%>/type/<%=type%>/place/<%=place_id%>">
+							<%= type_name %> <%= ref %>
+						</a>
+						<br>
+						Протяженность: <%= length %> км.
+						<hr>
+					</div>
+					<form action="" align="center">
+						<select id="SelectList" onchange="SetList()">
+							<option value="platform"> Остановки / платформы </option>
+							<option value="stop_position"> Места остановок </option>
+						</select>
+					</form>
+					<ol id="platform-list" class="marker-list"></ol>
+					<ol id="stop-position-list" class="marker-list" style="display: none;"></ol>
+				</script>
+
+				<script type="text/html" id="route_list_template">
+					<div class="content_body">
+						<h2 align="center">Маршруты общественного транспорта (<%= properties.name %>)</h2>
+							<h3>Автобусы</h3>
+							<p align="justify">
+							<% _.each(properties.buses, function(route) { %>
+								<div class="route_links" id="bus<%= route.Ref %>">
+									<%= route.Ref %>
+									[<a href="#ref/<%=route.Ref%>/type/bus/place/<%=properties.id%>">
+										show
+									</a>]
+								</div>
+							<% }); %>
+							</p>
+					</div>
+				</script>
+
+				<script type="text/html" id="route_directions_template">
+					<div id="content_header" align="center">
+						<div align="center">
+							<a href="#place/<%= place_id %>"><%= place_name %></a>
+							<hr>
+						</div>
+					</div>
+					<div class="content_body">
+						<h2 align="center">
+							<%= name %> <%= ref %>
+						</h2>
+						<% _.each(routes, function(item) { %>
+							<p>
+								<a href="#route/<%= item.properties.id %>" id="route_link_<%= item.properties.id %>" class="route_links">
+									<%= item.properties.name %>
+								</a>
+							</p>
+						<% }); %>
+						<% if(typeof old_schema !== "undefined") { %>
+							<p style="color:#FF0000;">
+								Внимание! Маршрут выполнен по старой схеме. Некоторая информация может быть недоступна.
+							</p>
+						<% } %>
+					</div>
+				</script>
+
+				<script src='/js/map.js'></script>
+			</div>
+		</div>
+	</body>
+</html>
