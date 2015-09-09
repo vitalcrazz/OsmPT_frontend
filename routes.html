@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<script src='/js/jquery-2.1.4.min.js'></script>
+		<script src='/js/underscore-min.js'></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			$.get("/place/places.json", function(data) {
+				console.log(data);
+				var template = _.template($('#place_list_template').html());
+				$("#container").html(template(data));	
+			});
+		</script>
+		
+		<div id="container">
+		
+		</div>
+		
+		<script type="text/html" id="place_list_template">
+			<% _.each(places, function(place) { %>
+				<div>
+					<%= place.name %> <%= place.region %>
+				</div>
+			<% }); %>
+		</script>
+	</body>
+</html>
