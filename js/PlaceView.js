@@ -84,7 +84,17 @@ var PlaceView = Backbone.View.extend({
 		map.addLayer(this.RouteLayer);
 	},
 	buildAllRoutes: function(tr_type) {
-        var lineWeight = 4;
+        var map = this.AppData.get('map');
+		var zm = map.getZoom();
+		var lineWeight = 4;
+		if(zm > 13 && zm < 16) {
+			lineWeight = 6;
+		}
+		else if(zm > 15) {
+			lineWeight = 8;
+		}
+		
+		console.log(lineWeight);
         //var lineColors = ['red', '#08f', '#0c0', '#f80'];
 		
 		if(this.Layers.length > 2) {
@@ -99,8 +109,7 @@ var PlaceView = Backbone.View.extend({
         var busLines = L.layerGroup();
 
 		var view = this;
-		var map = this.AppData.get('map');
-        var linesOnSegment, segmentCoords, segmentWidth;
+		var linesOnSegment, segmentCoords, segmentWidth;
 		
 		var tr_arr = this.model.get('properties');
 		var tr_arr_lines = this.model.get('features');
