@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>TODO supply a title</title>
+		<title>Routes</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
+		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		
 		<script src='/js/jquery-2.1.4.min.js'></script>
 		<script src='/js/underscore-min.js'></script>
+		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
 		<script type="text/javascript">
@@ -17,24 +22,54 @@
 			});
 		</script>
 		
-		<div id="container">
+		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Home</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search" />
+              <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+          </div>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            <li class="mdl-menu__item">About</li>
+            <li class="mdl-menu__item">Contact</li>
+            <li class="mdl-menu__item">Legal information</li>
+          </ul>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <div>
+            <span>OSM Public Transport</span>
+          </div>
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 		
-		</div>
-		
+		</nav>
+		  <div id="container">
+
+		  </div>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+			
+        </div>
+      </main>
+    </div>
+				
 		<script type="text/html" id="place_list_template">
-			<table>
 			<% _.each(places, function(place, index) { %>
-				<tr>
-					<td>
-						<%= index+1 %>
-					</td>
-					<td>
-						<a href="/#place/<%= place.id %>"><%= place.name %></a>
-					</td>
-					<td><%= place.region %></td>
-				</tr>
+				<a href="/#place/<%= place.id %>"><%= place.name %></a>
 			<% }); %>
-			</table>
 		</script>
 	</body>
 </html>
