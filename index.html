@@ -62,7 +62,7 @@
 		</nav>
 		  <div id="container">
 
-		  </div>
+		  </div>		  
 		  <div id='left_panel_content'></div>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
@@ -78,7 +78,7 @@
 					<h3>Автобусы</h3>
 					<p align="justify">
 					<% _.each(properties.buses, function(route) { %>
-						<div class="route_links" id="bus<%= route.Ref %>">
+						<div class="route_links mdl-button--fab" id="bus<%= route.Ref %>">
 							<%= route.Ref %>
 						</div>
 					<% }); %>

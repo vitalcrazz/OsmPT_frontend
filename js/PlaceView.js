@@ -47,10 +47,10 @@ var PlaceView = Backbone.View.extend({
 
 				route.visible = ! route.visible;
 				if(route.visible) {
-					$(iden).css('background', 'linear-gradient(90deg, '+route.color+' 5%, #EEEEEE 5%)');
+					$(iden).css('background', route.color);
 				}
 				else {
-					$(iden).css('background', '#FFFFFF');
+					$(iden).css('background', 'transparent');
 				}
 				//view.buildRoute(transport_index);
 				view.buildAllRoutes('bus');
