@@ -1,7 +1,7 @@
 var MapData = Backbone.Model.extend({
 	defaults: {
 		'mapEl': 'map',
-		'baseLayer': 'S',
+		'baseLayer': 'K',
 		'overlayIds': 'P',
 		'RouteID': '',
 		'PlaceID': 0,

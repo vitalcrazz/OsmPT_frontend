@@ -349,8 +349,8 @@ var stopsGeoJsonTileLayer = new L.TileLayer.GeoJSON('/stop_pos/{z}/{x}/{y}.geojs
 var mapData = new MapData({
 	'map': map,
 	'baseLayers': {
-		'S': MapSurferLayer,
 		'K': SputnikRuLayer,
+		'S': MapSurferLayer,
 		'M': MapnikLayer
 	},
 	'overlays': {
