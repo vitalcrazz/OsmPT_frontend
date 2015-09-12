@@ -11,17 +11,9 @@
 		
 		<script src='/js/jquery-2.1.4.min.js'></script>
 		<script src='/js/underscore-min.js'></script>
-		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="/css/styles.css">
 	</head>
-	<body>
-		<script type="text/javascript">
-			$.get("/place/places.json", function(data) {
-				console.log(data);
-				var template = _.template($('#place_list_template').html());
-				$("#container").html(template(data));	
-			});
-		</script>
-		
+	<body>		
 		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
@@ -72,6 +64,13 @@
 			<% _.each(places, function(place, index) { %>
 				<a href="/#place/<%= place.id %>"><%= place.name %></a>
 			<% }); %>
+		</script>
+		<script type="text/javascript">
+			$.get("/place/places.json", function(data) {
+				console.log(data);
+				var template = _.template($('#place_list_template').html());
+				$("#container").html(template(data));	
+			});
 		</script>
 	</body>
 </html>

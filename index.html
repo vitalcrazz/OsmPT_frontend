@@ -15,28 +15,15 @@
 		
 		<link rel="stylesheet" href="/css/leaflet.css" />
 		<link rel='stylesheet' href='/css/leaflet.label.css' />
-		<link rel='stylesheet' href='/css/Control.FullScreen.css' />
-		<link rel='stylesheet' href='/css/L.Control.Locate.min.css' />
-		<!--[if lt IE 9]>
-			<link rel='stylesheet' href='/css/L.Control.Locate.ie.min.css'/>
-		<![endif]-->
-
+		
 		<script src='/js/jquery-2.1.4.min.js'></script>
 		<script src='/js/underscore-min.js'></script>
 		<script src='/js/backbone-min.js'></script>
 		<script src='/js/leaflet.js'></script>
 		<script src='/js/leaflet.label.js'></script>
 		<script src='/js/TileLayer.GeoJSON.js'></script>
-		<script src='/js/Control.FullScreen.js'></script>
-		<script src='/js/L.Control.Locate.min.js' ></script>
 		<script src='/js/leaflet.polylineoffset.js' ></script>
 		<script src='/js/randomColor.js' ></script>
-
-		<script src='/js/MapData.js'></script>
-		<script src='/js/MapView.js'></script>
-		<script src='/js/RouteView.js'></script>
-		<script src='/js/PlaceView.js'></script>
-		<script src='/js/RefView.js'></script>
 	</head>
 	<body>
 		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -79,7 +66,7 @@
 		  <div id='left_panel_content'></div>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div id="map" style="height: 100%;">
+        <div id="map" style="position:absolute; top:64px;bottom:0;left:240px;right:0;">
 			
         </div>
       </main>
@@ -87,7 +74,7 @@
 		
 		<script type="text/html" id="route_list_template">
 			<div class="content_body">
-				<h2 align="center">Маршруты общественного транспорта (<%= properties.name %>)</h2>
+				<h2 align="center">(<%= properties.name %>)</h2>
 					<h3>Автобусы</h3>
 					<p align="justify">
 					<% _.each(properties.buses, function(route) { %>
@@ -99,6 +86,11 @@
 			</div>
 		</script>
 
+		<script src='/js/MapData.js'></script>
+		<script src='/js/MapView.js'></script>
+		<script src='/js/RouteView.js'></script>
+		<script src='/js/PlaceView.js'></script>
+		<script src='/js/RefView.js'></script>
 		<script src='/js/map.js'></script>
 	</body>
 </html>

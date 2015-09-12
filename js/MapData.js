@@ -1,7 +1,7 @@
 var MapData = Backbone.Model.extend({
 	defaults: {
 		'mapEl': 'map',
-		'baseLayer': 'K',
+		'baseLayer': 'M',
 		'overlayIds': 'P',
 		'RouteID': '',
 		'PlaceID': 0,
@@ -77,27 +77,6 @@ var MapData = Backbone.Model.extend({
 		var map = this.get('map');
 		
 		L.control.scale().addTo(map);
-
-		L.control.fullscreen({
-			position: 'topleft',
-			title: 'Full Screen',
-			forceSeparateButton: true,
-			forcePseudoFullscreen: false
-		}).addTo(map);
-
-		L.control.locate({
-			icon: 'fa fa-map-marker',
-			iconLoading: 'fa fa-spinner fa-spin',
-			onLocationError: function(err) {alert(err.message)},
-			onLocationOutsideMapBounds:  function(context) {
-					alert(context.options.strings.outsideMapBoundsMsg);
-			},
-			strings: {
-				title: "Show me where I am",
-				popup: "Вы находитесь в пределах {distance} м. от этой точки",
-				outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
-			}
-		}).addTo(map);
 
 		var topMessage = L.Control.extend({
 			options: {
