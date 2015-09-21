@@ -130,6 +130,7 @@ var PlaceView = Backbone.View.extend({
 			segmentWidth = linesOnSegmentcount * (lineWeight + 1);
 			
 			if(visible) {
+				/*
 				if(linesOnSegmentcount > 4)
 				{
 					var lineWeightCommon = lineWeight * 1.5;
@@ -155,7 +156,8 @@ var PlaceView = Backbone.View.extend({
 						offset: ((lineWeightCommon + 1) / 2) - (segmentWidth / 2)
 					}).addTo(busLines);
 				}
-				else if(lineSegment.geometry.type == "LineString") {
+				else */
+				if(lineSegment.geometry.type == "LineString") {
 					segmentCoords = L.GeoJSON.coordsToLatLngs(lineSegment.geometry.coordinates, 0);
 
 					L.polyline(segmentCoords, {
