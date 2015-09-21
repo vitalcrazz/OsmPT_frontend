@@ -50,7 +50,7 @@ var PlaceView = Backbone.View.extend({
 					$(iden).css('background', route.color);
 				}
 				else {
-					$(iden).css('background', 'transparent');
+					$(iden).css('background', 'rgba(158,158,158,.2)');
 				}
 				//view.buildRoute(transport_index);
 				view.buildAllRoutes('bus');
