@@ -130,7 +130,32 @@ var PlaceView = Backbone.View.extend({
 			segmentWidth = linesOnSegmentcount * (lineWeight + 1);
 			
 			if(visible) {
-				if(lineSegment.geometry.type == "LineString") {
+				if(linesOnSegmentcount > 4)
+				{
+					var lineWeightCommon = lineWeight * 1.5;
+					segmentWidth = 1 * (lineWeightCommon + 1);
+					segmentCoords = L.GeoJSON.coordsToLatLngs(lineSegment.geometry.coordinates, 0);
+
+					L.polyline(segmentCoords, {
+					  color: '#000',
+					  weight: segmentWidth + 5,
+					  opacity: 1
+					}).addTo(outlines);
+
+					L.polyline(segmentCoords, {
+					  color: '#fff',
+					  weight: segmentWidth + 3,
+					  opacity: 1
+					}).addTo(lineBg);
+
+					L.polyline(segmentCoords, {
+						color: "#000000",
+						weight: lineWeightCommon,
+						opacity: 1,
+						offset: ((lineWeightCommon + 1) / 2) - (segmentWidth / 2)
+					}).addTo(busLines);
+				}
+				else if(lineSegment.geometry.type == "LineString") {
 					segmentCoords = L.GeoJSON.coordsToLatLngs(lineSegment.geometry.coordinates, 0);
 
 					L.polyline(segmentCoords, {
