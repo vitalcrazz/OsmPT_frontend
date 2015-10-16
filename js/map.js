@@ -4,13 +4,13 @@ var PlaceInfo = Backbone.Model.extend();
 
 var Routes = Backbone.Collection.extend({
 	'model': RouteInfo,
-	'url': '/route'
+	'url': 'route'
 });
 
 var Refs = Backbone.Collection.extend({
 	'model': RefInfo,
 	'url': function() {
-		return "/place/"+this.place+"/type/"+this.type+"/ref";
+		return "place/"+this.place+"/type/"+this.type+"/ref";
 	},
 	'place': 0,
 	'type': ''
@@ -18,7 +18,7 @@ var Refs = Backbone.Collection.extend({
 
 var Places = Backbone.Collection.extend({
 	'model': PlaceInfo,
-	'url': '/place'
+	'url': 'place'
 });
 
 var routeCollection = new Routes();
