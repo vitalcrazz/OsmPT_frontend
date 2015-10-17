@@ -74,8 +74,8 @@ var MapView = Backbone.View.extend({
 		}
 	},
 	zoomInvalid: function() {
-		document.getElementById("top-message-box").innerHTML = "Приблизьте карту";
-		$('#top-message-box').fadeIn();
+		//document.getElementById("top-message-box").innerHTML = "Приблизьте карту";
+		//$('#top-message-box').fadeIn();
 	},
 	tilesLoading: function() {
 		document.getElementById("top-message-box").innerHTML = "Загрузка";

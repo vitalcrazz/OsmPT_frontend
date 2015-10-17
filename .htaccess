@@ -1,10 +1,10 @@
 AddDefaultCharset utf-8
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php
-RewriteRule ^([A-Za-z_]+)/([0-9]+)/([0-9]+)/([0-9]+)\.geojson$ /ajax/get_json_tile.php?type=$1&x=$3&y=$4&z=$2
-RewriteRule ^route/([0-9]+)$ /ajax/get_route_data.php?id=$1
-RewriteRule ^place/([0-9]+)/type/([A-Za-z_]+)/ref/(.+)$ /ajax/get_route_info.php?id=$1&type=$2&ref=$3
-# RewriteRule ^place/([0-9]+)$ /ajax/get_routes_list.php?id=$1
-RewriteRule ^place/([0-9]+)$ /place/$1.geojson
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME}\.php -f
+#RewriteRule ^(.*)$ $1.php
+#RewriteRule ^([A-Za-z_]+)/([0-9]+)/([0-9]+)/([0-9]+)\.geojson$ /ajax/get_json_tile.php?type=$1&x=$3&y=$4&z=$2
+#RewriteRule ^route/([0-9]+)$ /ajax/get_route_data.php?id=$1
+#RewriteRule ^place/([0-9]+)/type/([A-Za-z_]+)/ref/(.+)$ /ajax/get_route_info.php?id=$1&type=$2&ref=$3
+## RewriteRule ^place/([0-9]+)$ /ajax/get_routes_list.php?id=$1
+#RewriteRule ^place/([0-9]+)$ /place/$1.geojson
