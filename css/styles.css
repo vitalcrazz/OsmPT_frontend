@@ -16,14 +16,7 @@
 
 .route_links {
 	display: inline-block;
-	/*
-	padding: 8px;
-	margin: 4px;
-	border: 1px solid #000;
-	border-radius: 50%;
-	width: 26px;
-	height: 26px;
- */
+    line-height: 56px;
 	text-align: center;
 	cursor: pointer;
 }
