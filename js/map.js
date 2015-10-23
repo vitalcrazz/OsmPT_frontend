@@ -30,7 +30,17 @@ var Router = Backbone.Router.extend({
 		"map/:zoom/:lat/:lon(/layer/:layer)(/overlays/:overlays)(/feature/:feature)": "reload",
 		"route/:route": "load_route",
 		"ref/:ref/type/:type/place/:place": "load_directions",
-		"place/:place": "load_place",
+		"place/list": "place_list",
+		"place/:place": "load_place"
+	},
+	place_list: function() {
+		$("#left_panel_content").hide();
+		$.get("place/places.json", function(data) {
+			console.log(data);
+			var template = _.template($('#place_list_template').html());
+			$("#container").html(template(data));
+			$("#container").show();
+		});
 	},
 	reload: function(zoom, lat, lon, layer, overlays, feature) {
 		mapData.set({
@@ -63,6 +73,8 @@ var Router = Backbone.Router.extend({
 		routeInfo.fetch();
 	},
 	load_place: function(place) {
+		$("#container").hide();
+		$("#left_panel_content").show();
 		routeCollection.pop();
 		refCollection.pop();
 		
