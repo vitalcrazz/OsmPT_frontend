@@ -78,6 +78,7 @@ li.menu_item_right a {
 	display: block;
 	padding: 5px 5px 5px 15px;
 	background: #FFFFFF;
+	line-height: 56px;
 }
 
 .route_links:hover {
