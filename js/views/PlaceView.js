@@ -8,10 +8,10 @@ var PlaceView = Backbone.View.extend({
 		this.RefCols = new Array();
 		
 		this.listenTo(this.model, "change", this.place_reload);
-		//this.listenTo(this.model, "redraw", this.place_redraw);
+		this.listenTo(this.model, "redraw", this.place_redraw);
 	},
 	place_redraw: function() {
-		$('#left_panel').show();
+		$('#left_panel_content').show();
 		this.showPlaceRoutes();
 	},
 	place_reload: function() {

@@ -74,7 +74,6 @@ var Router = Backbone.Router.extend({
 	},
 	load_place: function(place) {
 		$("#container").hide();
-		$("#left_panel_content").show();
 		routeCollection.pop();
 		refCollection.pop();
 		
