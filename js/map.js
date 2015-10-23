@@ -367,3 +367,13 @@ var mapView = new MapView({'model': mapData, 'router': router});
 if(!Backbone.history.start()) {
 	mapData.trigger('change:position');
 }
+
+$("#source_link").click(function() {
+	window.location.href = "https://github.com/vitalcrazz/OsmPT_frontend";
+});
+$("#learnmore_link").click(function() {
+	window.location.href = "http://wiki.openstreetmap.org/wiki/Public_transport";
+});
+$("#bugreport_link").click(function() {
+	window.location.href = "https://github.com/vitalcrazz/OsmPT_frontend/issues";
+});
