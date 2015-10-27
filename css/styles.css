@@ -71,7 +71,7 @@ html, body {
 }
 
 .demo-navigation {
-	flex-grow: 1;
+	/* flex-grow: 1; */
 }
 .demo-layout .demo-navigation .mdl-navigation__link {
 	display: flex !important;
