@@ -35,6 +35,11 @@ var Router = Backbone.Router.extend({
 	},
 	place_list: function() {
 		$("#left_panel_content").hide();
+		
+		placesCollection.each(function(placeObj) {
+			placeObj.trigger('erase');
+		});
+		
 		$.get("place/places.json", function(data) {
 			console.log(data);
 			var template = _.template($('#place_list_template').html());
@@ -76,6 +81,10 @@ var Router = Backbone.Router.extend({
 		$("#container").hide();
 		routeCollection.pop();
 		refCollection.pop();
+		
+		placesCollection.each(function(placeObj) {
+			placeObj.trigger('erase');
+		});
 		
 		var placeModel = placesCollection.get(place);
 		if(typeof placeModel === 'undefined') {

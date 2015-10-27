@@ -9,10 +9,18 @@ var PlaceView = Backbone.View.extend({
 		
 		this.listenTo(this.model, "change", this.place_reload);
 		this.listenTo(this.model, "redraw", this.place_redraw);
+		this.listenTo(this.model, "erase", this.place_erase);
 	},
 	place_redraw: function() {
 		$('#left_panel_content').show();
 		this.showPlaceRoutes();
+	},
+	place_erase: function() {
+		_.each(this.model.get('properties').buses, function(route) {
+			route.visible = false;
+		});
+		
+		this.buildAllRoutes('bus');
 	},
 	place_reload: function() {
 		var ind = 0;
