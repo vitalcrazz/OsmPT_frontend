@@ -14,16 +14,16 @@
 		<link rel="stylesheet" href="css/styles.css">
 		
 		<link rel="stylesheet" href="css/leaflet.css" />
-		<link rel='stylesheet' href='css/leaflet.label.css' />
+		<link rel="stylesheet" href="css/leaflet.label.css" />
 		
-		<script src='js/jquery-2.1.4.min.js'></script>
-		<script src='js/underscore-min.js'></script>
-		<script src='js/backbone-min.js'></script>
-		<script src='js/leaflet.js'></script>
-		<script src='js/leaflet.label.js'></script>
-		<script src='js/TileLayer.GeoJSON.js'></script>
-		<script src='js/leaflet.polylineoffset.js' ></script>
-		<script src='js/randomColor.js' ></script>
+		<script src="js/libs/jquery-2.1.4.min.js"></script>
+		<script src="js/libs/underscore-min.js"></script>
+		<script src="js/libs/backbone-min.js"></script>
+		<script src="js/libs/leaflet.js"></script>
+		<script src="js/libs/leaflet.label.js"></script>
+		<script src="js/libs/TileLayer.GeoJSON.js"></script>
+		<script src="js/libs/leaflet.polylineoffset.js" ></script>
+		<script src="js/libs/randomColor.js" ></script>
 	</head>
 	<body>
 		<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -44,9 +44,9 @@
             <i class="material-icons">more_vert</i>
           </button>
           <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-            <li class="mdl-menu__item">About</li>
-            <li class="mdl-menu__item">Contact</li>
-            <li class="mdl-menu__item">Legal information</li>
+            <li class="mdl-menu__item" id="source_link">View source</li>
+            <li class="mdl-menu__item" id="learnmore_link">Learn more</li>
+            <li class="mdl-menu__item" id="bugreport_link">Report a bug</li>
           </ul>
         </div>
       </header>
@@ -57,25 +57,22 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-			<a class="mdl-navigation__link" href="index.html"><i class="material-icons md-24">map</i>&nbsp;Карта</a>
-			<a class="mdl-navigation__link" href="routes.html"><i class="material-icons md-24">directions_bus</i>&nbsp;Маршруты</a>
+			<a class="mdl-navigation__link" href="#"><i class="material-icons md-24">map</i>&nbsp;Карта</a>
+			<a class="mdl-navigation__link" href="#place/list"><i class="material-icons md-24">directions_bus</i>&nbsp;Маршруты</a>
 		</nav>
 		  <div id="container">
 
 		  </div>		  
-		  <div id='left_panel_content'></div>
+		  <div id="left_panel_content"></div>
       </div>
-      <main class="mdl-layout__content mdl-color--grey-100">
-        <div id="map" style="position:absolute; top:64px;bottom:0;left:240px;right:0;">
-			
-        </div>
+      <main class="mdl-layout__content mdl-color--grey-100" id="map">
       </main>
     </div>
 		
 		<script type="text/html" id="route_list_template">
 			<div class="content_body">
-				<h2 align="center">(<%= properties.name %>)</h2>
-					<h3>Автобусы</h3>
+				<h3 align="center"><%= properties.name %></h3>
+					<h4>Автобусы</h4>
 					<p align="justify">
 					<% _.each(properties.buses, function(route) { %>
 						<div class="route_links mdl-button--fab" id="bus<%= route.Ref %>">
@@ -85,12 +82,19 @@
 					</p>
 			</div>
 		</script>
+		<script type="text/html" id="place_list_template">
+			<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-900">
+			<% _.each(places, function(place, index) { %>
+				<a class="mdl-navigation__link" href="#place/<%= place.id %>"><%= place.name %></a>
+			<% }); %>
+			</nav>
+		</script>
 
-		<script src='js/MapData.js'></script>
-		<script src='js/MapView.js'></script>
-		<script src='js/RouteView.js'></script>
-		<script src='js/PlaceView.js'></script>
-		<script src='js/RefView.js'></script>
-		<script src='js/map.js'></script>
+		<script src="js/models/MapData.js"></script>
+		<script src="js/views/MapView.js"></script>
+		<script src="js/views/RouteView.js"></script>
+		<script src="js/views/PlaceView.js"></script>
+		<script src="js/views/RefView.js"></script>
+		<script src="js/map.js"></script>
 	</body>
 </html>
