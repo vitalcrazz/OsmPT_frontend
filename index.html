@@ -72,14 +72,29 @@
 		<script type="text/html" id="route_list_template">
 			<div class="content_body">
 				<h3 align="center"><%= properties.name %></h3>
-					<h4>Автобусы</h4>
-					<p align="justify">
-					<% _.each(properties.buses, function(route) { %>
-						<div class="route_links mdl-button--fab" id="bus<%= route.Ref %>">
-							<%= route.Ref %>
-						</div>
-					<% }); %>
-					</p>
+					<% if(properties.buses.length < 1 && properties.trolleybuses.length < 1) { %>
+						<p>Нет доступных маршрутов</p>
+					<% } %>
+					<% if(properties.buses.length > 0) { %>
+						<h4>Автобусы</h4>
+						<p align="justify">
+						<% _.each(properties.buses, function(route) { %>
+							<div class="route_links mdl-button--fab" id="bus<%= route.Ref %>">
+								<%= route.Ref %>
+							</div>
+						<% }); %>
+						</p>
+					<% } %>
+					<% if(properties.trolleybuses.length > 0) { %>
+						<h4>Троллейбусы</h4>
+						<p align="justify">
+						<% _.each(properties.trolleybuses, function(route) { %>
+							<div class="route_links mdl-button--fab" id="trolleybus<%= route.Ref %>">
+								<%= route.Ref %>
+							</div>
+						<% }); %>
+						</p>
+					<% } %>
 			</div>
 		</script>
 		<script type="text/html" id="place_list_template">

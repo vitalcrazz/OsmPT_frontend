@@ -20,7 +20,7 @@ var PlaceView = Backbone.View.extend({
 			route.visible = false;
 		});
 		
-		this.buildAllRoutes('bus');
+		this.buildAllRoutes();
 	},
 	place_reload: function() {
 		var ind = 0;
@@ -29,6 +29,11 @@ var PlaceView = Backbone.View.extend({
 			route.color = randomColor({luminosity: 'dark'});
 			route.visible = false;
 			view.RefCols['bus' + route.Ref] = route;
+		});
+		_.each(this.model.get('properties').trolleybuses, function(route) {
+			route.color = randomColor({luminosity: 'dark'});
+			route.visible = false;
+			view.RefCols['trolleybus' + route.Ref] = route;
 		});
 		
 		this.place_redraw();
@@ -47,12 +52,6 @@ var PlaceView = Backbone.View.extend({
 		_.each(this.model.get('properties').buses, function(route) {
 			var iden = "#" + 'bus' + route.Ref;
 			$(iden).click(function() {
-				/*
-				_.each(transport_type.routes, function(el) {
-					var el_iden = "#" + transport_index + el.ref;
-					$(el_iden).css('background', '#FFFFFF');
-				});*/
-
 				route.visible = ! route.visible;
 				if(route.visible) {
 					$(iden).css('background', route.color);
@@ -60,12 +59,24 @@ var PlaceView = Backbone.View.extend({
 				else {
 					$(iden).css('background', 'rgba(158,158,158,.2)');
 				}
-				//view.buildRoute(transport_index);
-				view.buildAllRoutes('bus');
+				view.buildAllRoutes();
+			});
+		});
+		_.each(this.model.get('properties').trolleybuses, function(route) {
+			var iden = "#" + 'trolleybus' + route.Ref;
+			$(iden).click(function() {
+				route.visible = ! route.visible;
+				if(route.visible) {
+					$(iden).css('background', route.color);
+				}
+				else {
+					$(iden).css('background', 'rgba(158,158,158,.2)');
+				}
+				view.buildAllRoutes();
 			});
 		});
 		
-		this.buildAllRoutes('bus');
+		this.buildAllRoutes();
 	},
 	buildRoute: function(tr_type) {
 		this.RouteLayer.clearLayers();
@@ -91,7 +102,7 @@ var PlaceView = Backbone.View.extend({
 		
 		map.addLayer(this.RouteLayer);
 	},
-	buildAllRoutes: function(tr_type) {
+	buildAllRoutes: function() {
         var map = this.AppData.get('map');
 		var zm = map.getZoom();
 		var lineWeight = 4;
@@ -128,6 +139,13 @@ var PlaceView = Backbone.View.extend({
 			linesOnSegment = lineSegment.properties.refs;
 			_.each(linesOnSegment, function(el) {
 				_.each(tr_arr.buses, function(route) {
+					if(route.Ref == el && route.visible) {
+						visible = true;
+						linesOnSegmentcount++;
+					}
+				});
+				
+				_.each(tr_arr.trolleybuses, function(route) {
 					if(route.Ref == el && route.visible) {
 						visible = true;
 						linesOnSegmentcount++;
@@ -182,7 +200,8 @@ var PlaceView = Backbone.View.extend({
 
 					var j=0;
 					_.each(linesOnSegment, function(el) {
-						if(view.RefCols[tr_type + el].visible){
+						var tr_type = ('bus' + el) in view.RefCols ? 'bus' : 'trolleybus';
+						if((tr_type + el) in view.RefCols && view.RefCols[tr_type + el].visible){
 							L.polyline(segmentCoords, {
 								color: view.RefCols[tr_type + el].color,
 								weight: lineWeight,
@@ -211,7 +230,8 @@ var PlaceView = Backbone.View.extend({
 
 						var j=0;
 						_.each(linesOnSegment, function(el) {
-							if(view.RefCols[tr_type + el].visible){
+							var tr_type = ('bus' + el) in view.RefCols ? 'bus' : 'trolleybus';
+							if((tr_type + el) in view.RefCols &&view.RefCols[tr_type + el].visible){
 								L.polyline(segmentCoords, {
 									color: view.RefCols[tr_type + el].color,
 									weight: lineWeight,
